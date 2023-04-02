@@ -14,6 +14,9 @@ const Header = () => {
         <li>
           <NavLink to="note/add">Add</NavLink>
         </li>
+        <li className="ms-auto">
+          <NavLink to="note/add">Login</NavLink>
+        </li>
       </ul>
     </div>
   );
