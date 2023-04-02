@@ -1,6 +1,7 @@
 import { Button, ButtonGroup, Col, Row, Table } from "react-bootstrap";
 
-function Note() {
+function Note({ notes }) {
+  console.log("From notes list: ", notes);
   return (
     <Row>
       <Col>
