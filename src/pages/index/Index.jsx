@@ -13,7 +13,7 @@ function Index() {
 
   return (
     <>
-      <NotesList notes={records} />
+      <NotesList notes={records} loading={loading} error={error} />
     </>
   );
 }
