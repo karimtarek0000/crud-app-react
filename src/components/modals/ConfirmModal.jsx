@@ -1,4 +1,4 @@
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../states/globalSlice";
 import { deleteNote } from "../../states/notesSlice";
@@ -18,10 +18,7 @@ function ConfirmModal() {
   const reducers = { deleteNote };
 
   const closeHandler = () => dispatch(closeModal());
-  const confirmHandler = () => {
-    dispatch(reducers[reducerName](data));
-    // if (!loading) dispatch(closeModal());
-  };
+  const confirmHandler = () => dispatch(reducers[reducerName](data));
 
   return (
     <>
@@ -35,7 +32,11 @@ function ConfirmModal() {
             Close
           </Button>
           <Button variant="danger" onClick={confirmHandler}>
-            {loading ? "loading" : titleConfirm}
+            {loading ? (
+              <Spinner size="sm" animation="border" variant="light" />
+            ) : (
+              titleConfirm
+            )}
           </Button>
         </Modal.Footer>
       </Modal>

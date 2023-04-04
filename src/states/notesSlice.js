@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { closeModal } from "./globalSlice";
 
 // Get all notes
 export const fetchNotes = createAsyncThunk(
@@ -19,9 +20,10 @@ export const fetchNotes = createAsyncThunk(
 export const deleteNote = createAsyncThunk(
   "notes/deleteNote",
   async (id, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
+    const { rejectWithValue, dispatch } = thunkAPI;
     try {
-      axios.delete(`${process.env.REACT_APP_NOTES}/${id}`);
+      await axios.delete(`${process.env.REACT_APP_NOTES}/${id}`);
+      dispatch(closeModal());
       return id;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -33,6 +35,7 @@ const initialState = {
   records: [],
   loading: false,
   error: null,
+  // global: globalReducer.getInitialState(),
 };
 const notesSlice = createSlice({
   name: "notes",

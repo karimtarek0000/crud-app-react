@@ -19,7 +19,7 @@ const global = createSlice({
       const { status, title, desc, titleConfirm, reducerName, data } = payload;
       state.modal = { status, title, desc, titleConfirm, reducerName, data };
     },
-    closeModal(state) {
+    closeModal: (state) => {
       state.modal = {
         status: false,
         title: "",
@@ -33,5 +33,5 @@ const global = createSlice({
 });
 
 export const { openModal, closeModal, confirmModal } = global.actions;
-export const globalReducer = global.reducer;
+export const globalReducer = global;
 export default global.reducer;
