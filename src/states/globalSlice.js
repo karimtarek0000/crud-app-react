@@ -1,0 +1,37 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  modal: {
+    status: false,
+    title: "",
+    desc: "",
+    titleConfirm: "",
+    reducerName: "",
+    data: "",
+  },
+};
+
+const global = createSlice({
+  name: "global",
+  initialState,
+  reducers: {
+    openModal(state, { payload }) {
+      const { status, title, desc, titleConfirm, reducerName, data } = payload;
+      state.modal = { status, title, desc, titleConfirm, reducerName, data };
+    },
+    closeModal(state) {
+      state.modal = {
+        status: false,
+        title: "",
+        desc: "",
+        titleConfirm: "",
+        reducerName: "",
+        data: "",
+      };
+    },
+  },
+});
+
+export const { openModal, closeModal, confirmModal } = global.actions;
+export const globalReducer = global.reducer;
+export default global.reducer;
