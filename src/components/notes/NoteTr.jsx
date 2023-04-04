@@ -1,5 +1,5 @@
 import { Button, ButtonGroup } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { openModal } from "../../states/globalSlice";
 
 function NoteTr({ id, desc, deleteNote }) {
