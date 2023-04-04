@@ -1,25 +1,10 @@
-import { Alert, Col, Row, Spinner, Table } from "react-bootstrap";
+import { memo } from "react";
+import { Col, Row, Table } from "react-bootstrap";
 import NotesTr from "../../components/notes/NoteTr";
 
-function Note({ notes, loading, error }) {
-  // If loading
-  if (loading)
-    return (
-      <Col className="d-flex justify-content-center">
-        <Spinner animation="border" variant="primary" />
-      </Col>
-    );
-
-  // If error
-  if (error)
-    return (
-      <Col className="d-flex justify-content-center">
-        <Alert variant="primary">{error}</Alert>;
-      </Col>
-    );
-
+function Note({ notes, deleteHandler }) {
   const tr = notes.map(({ id, desc }) => (
-    <NotesTr key={id} id={id} desc={desc} />
+    <NotesTr key={id} id={id} desc={desc} deleteNote={deleteHandler} />
   ));
 
   return (
@@ -43,4 +28,4 @@ function Note({ notes, loading, error }) {
   );
 }
 
-export default Note;
+export default memo(Note);
