@@ -1,6 +1,9 @@
 import { Alert, Col, Spinner } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
-function Loading({ loading, error, children }) {
+function Loading({ children }) {
+  const { loading, error } = useSelector((state) => state.notesSlice);
+
   // If loading
   if (loading)
     return (

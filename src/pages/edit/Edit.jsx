@@ -1,4 +1,4 @@
-function Edit() {
+function EditNote() {
   return (
     <>
       <h2>edit</h2>
@@ -6,4 +6,4 @@ function Edit() {
   );
 }
 
-export default Edit;
+export default EditNote;

@@ -5,7 +5,7 @@ import NotesList from "../../components/notes/NotesList";
 import { deleteNote, fetchNotes } from "../../states/notesSlice";
 
 function Index() {
-  const { records, loading, error } = useSelector((state) => state.notesSlice);
+  const { records } = useSelector((state) => state.notesSlice);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function Index() {
 
   return (
     <>
-      <Loading loading={loading} error={error}>
+      <Loading>
         <NotesList notes={records} deleteHandler={deleteHandler} />
       </Loading>
     </>
