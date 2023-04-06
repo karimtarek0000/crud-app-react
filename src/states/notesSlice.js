@@ -20,10 +20,9 @@ export const fetchNotes = createAsyncThunk(
 export const deleteNote = createAsyncThunk(
   "notes/deleteNote",
   async (id, thunkAPI) => {
-    const { rejectWithValue, dispatch } = thunkAPI;
+    const { rejectWithValue } = thunkAPI;
     try {
       await axios.delete(`${process.env.REACT_APP_NOTES}/${id}`);
-      dispatch(closeModal());
       return id;
     } catch (err) {
       return rejectWithValue(err.message);

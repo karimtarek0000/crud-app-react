@@ -18,7 +18,10 @@ function ConfirmModal() {
   const reducers = { deleteNote };
 
   const closeHandler = () => dispatch(closeModal());
-  const confirmHandler = () => dispatch(reducers[reducerName](data));
+  const confirmHandler = async () => {
+    await dispatch(reducers[reducerName](data)).unwrap();
+    closeHandler();
+  };
 
   return (
     <>
