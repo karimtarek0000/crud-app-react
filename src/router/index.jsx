@@ -1,8 +1,8 @@
 import Dashboard from "../layouts/dashboard/Dashboard";
 import NotFound from "../pages/404/NotFound";
-import Add from "../pages/add/Add";
+import AddNote from "../pages/add/Add";
 import Details from "../pages/details/Details";
-import Edit from "../pages/edit/Edit";
+import EditNote from "../pages/edit/Edit";
 import Index from "../pages/index/Index";
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -18,11 +18,11 @@ const router = createBrowserRouter([
       },
       {
         path: "note/add",
-        element: <Add />,
+        element: <AddNote />,
       },
       {
         path: "note/edit/:id",
-        element: <Edit />,
+        element: <EditNote />,
         loader: ({ params }) => {
           if (isNaN(params.id))
             throw new Response("Bad", {

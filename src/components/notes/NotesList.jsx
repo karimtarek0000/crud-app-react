@@ -2,20 +2,17 @@ import { memo } from "react";
 import { Col, Row, Table } from "react-bootstrap";
 import NotesTr from "../../components/notes/NoteTr";
 
-function Note({ notes, deleteHandler }) {
-  const tr = notes.map(({ id, desc }) => (
-    <NotesTr key={id} id={id} desc={desc} deleteNote={deleteHandler} />
-  ));
+function Note({ notes }) {
+  const tr = notes.map((note) => <NotesTr key={note.id} note={note} />);
 
   return (
     <Row>
       <Col className="d-flex justify-content-center">
         <Table striped bordered hover>
           <thead>
-            <tr className="text-center">
-              <th>Num</th>
-              <th style={{ width: "80%" }}>Note</th>
-              <th style={{ width: "10%" }}>Action</th>
+            <tr>
+              <th style={{ width: "80%" }} className="text-start">Note</th>
+              <th style={{ width: "10%" }} className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>

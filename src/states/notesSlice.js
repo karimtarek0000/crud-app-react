@@ -31,6 +31,20 @@ export const deleteNote = createAsyncThunk(
   }
 );
 
+// Add new note
+export const addNote = createAsyncThunk(
+  "notes/addNote",
+  async (note, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const { data } = await axios.post(process.env.REACT_APP_NOTES, note);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   records: [],
   loading: false,
@@ -42,7 +56,7 @@ const notesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    // For get all notes
+    // Get all notes
     builder.addCase(fetchNotes.pending, (state) => {
       state.loading = true;
     });
@@ -54,8 +68,8 @@ const notesSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
-    // For delete a note
-    builder.addCase(deleteNote.pending, (state, action) => {
+    // Delete a note
+    builder.addCase(deleteNote.pending, (state) => {
       state.loading = true;
     });
     builder.addCase(deleteNote.fulfilled, (state, { payload }) => {
@@ -63,6 +77,18 @@ const notesSlice = createSlice({
       state.records = state.records.filter((record) => record.id !== payload);
     });
     builder.addCase(deleteNote.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // Add a note
+    builder.addCase(addNote.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addNote.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.records.push(payload);
+    });
+    builder.addCase(addNote.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

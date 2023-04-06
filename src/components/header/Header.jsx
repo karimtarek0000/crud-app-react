@@ -5,14 +5,14 @@ const Header = () => {
   return (
     <div className="header">
       <h1>NOTES APP</h1>
-      <ul className="nav">
+      <ul className="nav bg-primary rounded">
         <li>
           <NavLink end to="/">
-            Home
+            Notes
           </NavLink>
         </li>
         <li>
-          <NavLink to="note/add">Add</NavLink>
+          <NavLink to="note/add">Add Note</NavLink>
         </li>
         <li className="ms-auto">
           <NavLink to="note/add">Login</NavLink>
