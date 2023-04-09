@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { closeModal } from "./globalSlice";
 
 // Get all notes
 export const fetchNotes = createAsyncThunk(
@@ -44,11 +43,25 @@ export const addNote = createAsyncThunk(
   }
 );
 
+// Get a note
+export const getNote = createAsyncThunk(
+  "notes/getNote",
+  async (id, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      const { data } = await axios.get(`${process.env.REACT_APP_NOTES}/${id}`);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   records: [],
+  record: {},
   loading: false,
   error: null,
-  // global: globalReducer.getInitialState(),
 };
 const notesSlice = createSlice({
   name: "notes",
@@ -88,6 +101,18 @@ const notesSlice = createSlice({
       state.records.push(payload);
     });
     builder.addCase(addNote.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // Get a note
+    builder.addCase(getNote.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(getNote.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.record = payload;
+    });
+    builder.addCase(getNote.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });

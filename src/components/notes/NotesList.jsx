@@ -11,8 +11,12 @@ function Note({ notes }) {
         <Table striped bordered hover>
           <thead>
             <tr>
-              <th style={{ width: "80%" }} className="text-start">Note</th>
-              <th style={{ width: "10%" }} className="text-center">Action</th>
+              <th style={{ width: "80%" }} className="text-start">
+                Note
+              </th>
+              <th style={{ width: "10%" }} className="text-center">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody>

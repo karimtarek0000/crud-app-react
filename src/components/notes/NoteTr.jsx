@@ -1,5 +1,6 @@
 import { Button, ButtonGroup } from "react-bootstrap";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { openModal } from "../../states/globalSlice";
 
 function NoteTr({ note }) {
@@ -22,8 +23,10 @@ function NoteTr({ note }) {
   return (
     <tr className="text-center">
       <td className="text-start">
-        <h3>{title}</h3>
-        <p>{desc}</p>
+        <h3>
+          <Link to={`note/${id}`}>{title}</Link>
+        </h3>
+        <p className="truncate">{desc}</p>
       </td>
       <td>
         <ButtonGroup aria-label="Basic example">
