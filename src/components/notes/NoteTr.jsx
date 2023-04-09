@@ -11,8 +11,8 @@ function NoteTr({ note }) {
   const deleteHandler = () => {
     const dataModal = {
       status: true,
-      title: "Delete a Note",
-      desc: `You want delete note equal id #${id} ?`,
+      title: "Delete Note",
+      desc: `You want delete note ${title} ?`,
       titleConfirm: "Delete",
       reducerName: "deleteNote",
       data: id,
@@ -24,13 +24,17 @@ function NoteTr({ note }) {
     <tr className="text-center">
       <td className="text-start">
         <h3>
-          <Link to={`note/${id}`}>{title}</Link>
+          <Link className="no-underline" to={`note/${id}`}>
+            {title}
+          </Link>
         </h3>
         <p className="truncate">{desc}</p>
       </td>
       <td>
         <ButtonGroup aria-label="Basic example">
-          <Button variant="success">Edit</Button>
+          <Button variant="success" as={Link} to={`note/edit/${id}`}>
+            Edit
+          </Button>
           <Button variant="danger" onClick={deleteHandler}>
             Delete
           </Button>

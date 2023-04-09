@@ -57,6 +57,19 @@ export const getNote = createAsyncThunk(
   }
 );
 
+// Update note
+export const updateNote = createAsyncThunk(
+  "notes/updateNote",
+  async (note, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      await axios.patch(`${process.env.REACT_APP_NOTES}/${note.id}`, note);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   records: [],
   record: {},
@@ -107,12 +120,25 @@ const notesSlice = createSlice({
     // Get a note
     builder.addCase(getNote.pending, (state) => {
       state.loading = true;
+      state.record = {};
     });
     builder.addCase(getNote.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.record = payload;
     });
     builder.addCase(getNote.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
+    // Update note
+    builder.addCase(updateNote.pending, (state) => {
+      state.loading = true;
+      state.record = {};
+    });
+    builder.addCase(updateNote.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(updateNote.rejected, (state, action) => {
       state.loading = false;
       state.error = action.payload;
     });
