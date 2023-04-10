@@ -79,7 +79,11 @@ const initialState = {
 const notesSlice = createSlice({
   name: "notes",
   initialState,
-  reducers: {},
+  reducers: {
+    cleanRecord(state) {
+      state.record = {};
+    },
+  },
   extraReducers(builder) {
     // Get all notes
     builder.addCase(fetchNotes.pending, (state) => {
@@ -120,7 +124,6 @@ const notesSlice = createSlice({
     // Get a note
     builder.addCase(getNote.pending, (state) => {
       state.loading = true;
-      state.record = {};
     });
     builder.addCase(getNote.fulfilled, (state, { payload }) => {
       state.loading = false;
@@ -145,5 +148,5 @@ const notesSlice = createSlice({
   },
 });
 
-// export const { test } = notesSlice.actions;
+export const { cleanRecord } = notesSlice.actions;
 export default notesSlice.reducer;

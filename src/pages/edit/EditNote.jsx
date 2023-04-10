@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
 import Loading from "../../components/loading/Loading";
 import useNoteDetails from "../../hooks/useNoteDetails";
-import { updateNote } from "../../states/notesSlice";
+import { cleanRecord, updateNote } from "../../states/notesSlice";
 
 function EditNote() {
   const navigate = useNavigate();
@@ -16,12 +16,16 @@ function EditNote() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (record && !titleNote && !descNote) {
+    if (record) {
       const { title, desc } = record;
       setTitleNote(title || "");
       setDescNote(desc || "");
     }
-  }, [record, titleNote, descNote]);
+  }, [record]);
+
+  useEffect(() => {
+    return () => dispatch(cleanRecord());
+  }, [dispatch]);
 
   const changeTitleNoteHandler = (e) => {
     setTitleNote(e.target.value);
