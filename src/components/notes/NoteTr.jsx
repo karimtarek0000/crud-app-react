@@ -1,7 +1,7 @@
 import { Button, ButtonGroup } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { openModal } from "../../states/globalSlice";
+import { openModal } from "../../store/globalSlice";
 
 function NoteTr({ note }) {
   const { id, title, desc } = note;

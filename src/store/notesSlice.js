@@ -136,7 +136,6 @@ const notesSlice = createSlice({
     // Update note
     builder.addCase(updateNote.pending, (state) => {
       state.loading = true;
-      state.record = {};
     });
     builder.addCase(updateNote.fulfilled, (state) => {
       state.loading = false;

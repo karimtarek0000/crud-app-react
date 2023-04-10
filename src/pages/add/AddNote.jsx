@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
-import { addNote } from "../../states/notesSlice";
+import { addNote } from "../../store/notesSlice";
 
 function AddNote() {
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
 import Loading from "../../components/loading/Loading";
 import useNoteDetails from "../../hooks/useNoteDetails";
-import { cleanRecord, updateNote } from "../../states/notesSlice";
+import { cleanRecord, updateNote } from "../../store/notesSlice";
 
 function EditNote() {
   const navigate = useNavigate();
