@@ -1,15 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
-import { addNote } from "../../states/notesSlice";
+import Loading from "../../components/loading/Loading";
+import useNoteDetails from "../../hooks/useNoteDetails";
+import { cleanRecord, updateNote } from "../../store/notesSlice";
 
-function AddNote() {
+function EditNote() {
   const navigate = useNavigate();
+  const record = useNoteDetails();
+
   const [titleNote, setTitleNote] = useState("");
   const [descNote, setDescNote] = useState("");
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (record) {
+      const { title, desc } = record;
+      setTitleNote(title || "");
+      setDescNote(desc || "");
+    }
+  }, [record]);
+
+  useEffect(() => {
+    return () => dispatch(cleanRecord());
+  }, [dispatch]);
 
   const changeTitleNoteHandler = (e) => {
     setTitleNote(e.target.value);
@@ -22,10 +38,12 @@ function AddNote() {
     return !!!(titleNote && descNote);
   };
 
-  const addNoteHandler = async (e) => {
+  const editNoteHandler = async (e) => {
     e.preventDefault();
     try {
-      await dispatch(addNote({ title: titleNote, desc: descNote })).unwrap();
+      await dispatch(
+        updateNote({ ...record, title: titleNote, desc: descNote })
+      ).unwrap();
       navigate("/");
     } catch (error) {
       console.log("Error");
@@ -33,13 +51,12 @@ function AddNote() {
   };
 
   return (
-    <>
-      <Form onSubmit={addNoteHandler}>
+    <Loading>
+      <Form onSubmit={editNoteHandler}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Title note</Form.Label>
           <Form.Control
             value={titleNote}
-            name="note"
             onChange={changeTitleNoteHandler}
             type="text"
             placeholder="Title note"
@@ -49,7 +66,6 @@ function AddNote() {
           <Form.Label>Description note</Form.Label>
           <Form.Control
             value={descNote}
-            name="description"
             onChange={changeNoteDescriptionHandler}
             type="text"
             as="textarea"
@@ -57,10 +73,10 @@ function AddNote() {
           />
         </Form.Group>
 
-        <SubmitBtn title="Add note" disabled={statusDisabledSubmit()} />
+        <SubmitBtn title="Edit note" disabled={statusDisabledSubmit()} />
       </Form>
-    </>
+    </Loading>
   );
 }
 
-export default AddNote;
+export default EditNote;

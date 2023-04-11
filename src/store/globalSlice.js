@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  auth: true,
   modal: {
     status: false,
     title: "",

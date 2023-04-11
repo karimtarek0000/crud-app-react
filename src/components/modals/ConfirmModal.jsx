@@ -1,7 +1,7 @@
 import { Button, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "../../states/globalSlice";
-import { deleteNote } from "../../states/notesSlice";
+import { closeModal } from "../../store/globalSlice";
+import { deleteNote } from "../../store/notesSlice";
 import SubmitBtn from "../buttons/SubmitBtn";
 
 function ConfirmModal() {

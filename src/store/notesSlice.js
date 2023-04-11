@@ -57,6 +57,19 @@ export const getNote = createAsyncThunk(
   }
 );
 
+// Update note
+export const updateNote = createAsyncThunk(
+  "notes/updateNote",
+  async (note, thunkAPI) => {
+    const { rejectWithValue } = thunkAPI;
+    try {
+      await axios.patch(`${process.env.REACT_APP_NOTES}/${note.id}`, note);
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   records: [],
   record: {},
@@ -66,7 +79,11 @@ const initialState = {
 const notesSlice = createSlice({
   name: "notes",
   initialState,
-  reducers: {},
+  reducers: {
+    cleanRecord(state) {
+      state.record = {};
+    },
+  },
   extraReducers(builder) {
     // Get all notes
     builder.addCase(fetchNotes.pending, (state) => {
@@ -116,8 +133,19 @@ const notesSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     });
+    // Update note
+    builder.addCase(updateNote.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateNote.fulfilled, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(updateNote.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    });
   },
 });
 
-// export const { test } = notesSlice.actions;
+export const { cleanRecord } = notesSlice.actions;
 export default notesSlice.reducer;
