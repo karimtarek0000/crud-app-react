@@ -1,7 +1,7 @@
 # Notes App with React
 
 
-## Project uses
+## Project build with
 ### Redux
 ### Routing
 ### Lazy loading for pages
