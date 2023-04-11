@@ -1,5 +1,8 @@
 import { noteParamHandler } from "../guard/validations";
+import Auth from "../layouts/auth/Auth";
 import Dashboard from "../layouts/dashboard/Dashboard";
+import LogIn from "../pages/auth/Login";
+import SignUp from "../pages/auth/SignUp";
 import Index from "../pages/index/Index";
 import { lazyLoadRoutes } from "./lazy";
 const { createBrowserRouter } = require("react-router-dom");
@@ -30,8 +33,18 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <h1>login</h1>,
+    path: "/auth",
+    element: <Auth />,
+    children: [
+      {
+        index: true,
+        element: <LogIn />,
+      },
+      {
+        path: "sign-up",
+        element: <SignUp />,
+      },
+    ],
   },
 ]);
 
