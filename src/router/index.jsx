@@ -1,4 +1,5 @@
 import { noteParamHandler } from "../guard/validations";
+import Auth from "../layouts/auth/Auth";
 import Dashboard from "../layouts/dashboard/Dashboard";
 import Index from "../pages/index/Index";
 import { lazyLoadRoutes } from "./lazy";
@@ -30,8 +31,18 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/login",
-    element: <h1>login</h1>,
+    path: "/auth",
+    element: <Auth />,
+    children: [
+      {
+        index: true,
+        element: lazyLoadRoutes("pages/auth", "LogIn"),
+      },
+      {
+        path: "sign-up",
+        element: lazyLoadRoutes("pages/auth", "SignUp"),
+      },
+    ],
   },
 ]);
 
