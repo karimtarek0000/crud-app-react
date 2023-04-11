@@ -13,6 +13,7 @@ function EditNote() {
 
   const [titleNote, setTitleNote] = useState("");
   const [descNote, setDescNote] = useState("");
+  const [stopLoading, setStopLoading] = useState(true);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,9 +42,12 @@ function EditNote() {
   const editNoteHandler = async (e) => {
     e.preventDefault();
     try {
+      setStopLoading(false);
+
       await dispatch(
         updateNote({ ...record, title: titleNote, desc: descNote })
       ).unwrap();
+
       navigate("/");
     } catch (error) {
       console.log("Error");
@@ -51,7 +55,7 @@ function EditNote() {
   };
 
   return (
-    <Loading>
+    <Loading stop={stopLoading}>
       <Form onSubmit={editNoteHandler}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Title note</Form.Label>
