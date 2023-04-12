@@ -3,7 +3,7 @@
 
 ## Project build with
 ### Redux
-### Routing
+### React router
 ### Lazy loading for pages
 ### Auth
 ### Formik
