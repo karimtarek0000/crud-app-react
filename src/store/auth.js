@@ -47,7 +47,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUserData(state, payload) {
+    setRegister(state, payload) {
       const { user, token } = payload;
       state.userData = user;
       state.token = token;
@@ -72,7 +72,7 @@ const authSlice = createSlice({
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
       state.loading = false;
-      authSlice.caseReducers.setUserData(state, payload);
+      authSlice.caseReducers.setRegister(state, payload);
     });
     builder.addCase(signUp.rejected, (state) => {
       state.loading = false;
@@ -83,7 +83,7 @@ const authSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
       state.loading = false;
-      authSlice.caseReducers.setUserData(state, payload);
+      authSlice.caseReducers.setRegister(state, payload);
     });
     builder.addCase(login.rejected, (state) => {
       state.loading = false;
