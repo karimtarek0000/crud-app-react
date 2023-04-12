@@ -1,12 +1,17 @@
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
-// Best way to guard pages
 const guard = (Component) => {
   const Wrapper = (props) => {
-    const { auth } = useSelector((state) => state.globalSlice);
+    const { token, userData, loggedIn } = useSelector(
+      (state) => state.authSlice
+    );
 
-    return auth ? <Component {...props} /> : <Navigate to="/login" />;
+    return token && userData && loggedIn ? (
+      <Component {...props} />
+    ) : (
+      <Navigate to="/auth" />
+    );
   };
   return Wrapper;
 };
