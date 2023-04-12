@@ -13,7 +13,7 @@ export const signUp = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -30,7 +30,7 @@ export const login = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -40,7 +40,6 @@ const initialState = {
   token: JSON.parse(localStorage.getItem("token")) || null,
   loggedIn: JSON.parse(localStorage.getItem("loggedIn")) || false,
   loading: false,
-  error: false,
 };
 
 const authSlice = createSlice({
@@ -74,7 +73,7 @@ const authSlice = createSlice({
       state.loading = false;
       authSlice.caseReducers.setRegister(state, payload);
     });
-    builder.addCase(signUp.rejected, (state) => {
+    builder.addCase(signUp.rejected, (state, { payload }) => {
       state.loading = false;
     });
     // Login
@@ -85,7 +84,7 @@ const authSlice = createSlice({
       state.loading = false;
       authSlice.caseReducers.setRegister(state, payload);
     });
-    builder.addCase(login.rejected, (state) => {
+    builder.addCase(login.rejected, (state, { payload }) => {
       state.loading = false;
     });
   },

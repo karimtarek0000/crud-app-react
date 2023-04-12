@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 import { logOut } from "../../store/auth";
@@ -12,6 +13,7 @@ const Header = () => {
   const logOutHandler = () => {
     dispatch(logOut());
     navigate("/auth");
+    toast.success("Logout successfully");
   };
 
   return (
