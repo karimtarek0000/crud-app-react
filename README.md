@@ -5,6 +5,7 @@
 ### Redux
 ### Routing
 ### Lazy loading for pages
+### Auth
 ### Guard
 ### Fetch data with axios
 ### React bootstrap
