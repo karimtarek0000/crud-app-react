@@ -6,7 +6,7 @@ import guardAuth from "../../guard/guardAuth";
 function Auth() {
   return (
     <>
-      <Toaster toastOptions={{ duration: 5000 }} />
+      <Toaster />
       <Container fluid>
         <div className="width-40 mx-auto height-100 d-flex flex-column justify-content-center">
           <h2 className="text-center mb-4">Notes App</h2>

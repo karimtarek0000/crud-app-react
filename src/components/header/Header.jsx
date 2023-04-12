@@ -8,11 +8,9 @@ import { logOut } from "../../store/auth";
 const Header = () => {
   const { userData } = useSelector((state) => state.authSlice);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const logOutHandler = () => {
     dispatch(logOut());
-    navigate("/auth");
     toast.success("Logout successfully");
   };
 
