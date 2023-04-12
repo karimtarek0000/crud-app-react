@@ -46,7 +46,15 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setUserData(state, payload) {
+      const { user, token } = payload;
+      state.userData = user;
+      state.token = token;
+      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("userData", JSON.stringify(user));
+    },
+  },
   extraReducers(builder) {
     // Sign up
     builder.addCase(signUp.pending, (state) => {
@@ -54,7 +62,7 @@ const authSlice = createSlice({
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
       state.loading = false;
-      console.log("Signup: ", payload);
+      authSlice.caseReducers.setUserData(state, payload);
     });
     builder.addCase(signUp.rejected, (state) => {
       state.loading = false;
@@ -64,12 +72,8 @@ const authSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
-      const { user, token } = payload;
       state.loading = false;
-      state.userData = user;
-      state.token = token;
-      localStorage.setItem("token", JSON.stringify(token));
-      localStorage.setItem("userData", JSON.stringify(user));
+      authSlice.caseReducers.setUserData(state, payload);
     });
     builder.addCase(login.rejected, (state) => {
       state.loading = false;

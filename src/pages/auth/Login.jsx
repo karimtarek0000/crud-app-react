@@ -34,10 +34,10 @@ function LogIn() {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    async onSubmit(values, { resetForm }) {
+    async onSubmit(data, { resetForm }) {
       try {
         resetForm();
-        await dispatch(login(values)).unwrap();
+        await dispatch(login(data)).unwrap();
         navigate("/");
       } catch (error) {
         console.log("error", error);
