@@ -6,6 +6,7 @@
 ### Routing
 ### Lazy loading for pages
 ### Auth
+### Formik
 ### Guard
 ### Fetch data with axios
 ### React bootstrap
