@@ -7,7 +7,6 @@ const initialState = {
     title: "",
     desc: "",
     titleConfirm: "",
-    reducerName: "",
     data: "",
   },
 };
@@ -17,8 +16,8 @@ const global = createSlice({
   initialState,
   reducers: {
     openModal(state, { payload }) {
-      const { status, title, desc, titleConfirm, reducerName, data } = payload;
-      state.modal = { status, title, desc, titleConfirm, reducerName, data };
+      const { status, title, desc, titleConfirm, data } = payload;
+      state.modal = { status, title, desc, titleConfirm, data };
     },
     closeModal: (state) => {
       state.modal = {
@@ -26,7 +25,6 @@ const global = createSlice({
         title: "",
         desc: "",
         titleConfirm: "",
-        reducerName: "",
         data: "",
       };
     },

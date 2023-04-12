@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
@@ -28,8 +29,9 @@ function AddNote() {
     try {
       await dispatch(addNote({ title: titleNote, desc: descNote })).unwrap();
       navigate("/");
-    } catch (error) {
-      console.log("Error");
+      toast.success("Has been added note successfully");
+    } catch {
+      toast.error("Error please try again!");
     }
   };
 

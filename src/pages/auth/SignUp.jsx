@@ -1,6 +1,7 @@
 import { useFormik } from "formik";
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -48,8 +49,9 @@ function SignUp() {
         await dispatch(signUp(data)).unwrap();
         setTerms(false);
         navigate("/");
-      } catch (error) {
-        console.log("error", error);
+        toast.success(`Signup Successfully, welcome ${data.name}`);
+      } catch (err) {
+        toast.error(err);
       }
     },
   });

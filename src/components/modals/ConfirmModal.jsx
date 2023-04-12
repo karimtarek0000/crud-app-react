@@ -1,4 +1,5 @@
 import { Button, Modal } from "react-bootstrap";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/globalSlice";
 import { deleteNote } from "../../store/notesSlice";
@@ -12,16 +13,18 @@ function ConfirmModal() {
     title,
     desc,
     titleConfirm,
-    reducerName,
     data = "",
   } = useSelector(({ globalSlice }) => globalSlice.modal);
 
-  const reducers = { deleteNote };
-
   const closeHandler = () => dispatch(closeModal());
   const confirmHandler = async () => {
-    await dispatch(reducers[reducerName](data)).unwrap();
-    closeHandler();
+    try {
+      await dispatch(deleteNote(data)).unwrap();
+      closeHandler();
+      toast.success("Has been delete note successfully");
+    } catch {
+      toast.error("Error please try again!");
+    }
   };
 
   return (

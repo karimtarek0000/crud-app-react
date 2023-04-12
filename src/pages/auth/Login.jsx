@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { Form } from "react-bootstrap";
+import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -39,8 +40,9 @@ function LogIn() {
         resetForm();
         await dispatch(login(data)).unwrap();
         navigate("/");
+        toast.success(`Login Successfully`);
       } catch (error) {
-        console.log("error", error);
+        toast.error("Email or password not correct!");
       }
     },
   });

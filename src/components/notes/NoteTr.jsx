@@ -14,7 +14,6 @@ function NoteTr({ note }) {
       title: "Delete Note",
       desc: `You want delete note ${title} ?`,
       titleConfirm: "Delete",
-      reducerName: "deleteNote",
       data: id,
     };
     dispatch(openModal(dataModal));

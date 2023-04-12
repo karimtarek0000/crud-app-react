@@ -13,7 +13,7 @@ export const signUp = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -30,7 +30,7 @@ export const login = createAsyncThunk(
       );
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );
@@ -40,14 +40,13 @@ const initialState = {
   token: JSON.parse(localStorage.getItem("token")) || null,
   loggedIn: JSON.parse(localStorage.getItem("loggedIn")) || false,
   loading: false,
-  error: false,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUserData(state, payload) {
+    setRegister(state, payload) {
       const { user, token } = payload;
       state.userData = user;
       state.token = token;
@@ -72,9 +71,9 @@ const authSlice = createSlice({
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
       state.loading = false;
-      authSlice.caseReducers.setUserData(state, payload);
+      authSlice.caseReducers.setRegister(state, payload);
     });
-    builder.addCase(signUp.rejected, (state) => {
+    builder.addCase(signUp.rejected, (state, { payload }) => {
       state.loading = false;
     });
     // Login
@@ -83,9 +82,9 @@ const authSlice = createSlice({
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
       state.loading = false;
-      authSlice.caseReducers.setUserData(state, payload);
+      authSlice.caseReducers.setRegister(state, payload);
     });
-    builder.addCase(login.rejected, (state) => {
+    builder.addCase(login.rejected, (state, { payload }) => {
       state.loading = false;
     });
   },
