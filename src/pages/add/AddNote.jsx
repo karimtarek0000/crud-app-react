@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
 import { addNote } from "../../store/notesSlice";
@@ -10,6 +10,7 @@ function AddNote() {
   const [titleNote, setTitleNote] = useState("");
   const [descNote, setDescNote] = useState("");
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.notesSlice);
 
   const changeTitleNoteHandler = (e) => {
     setTitleNote(e.target.value);
@@ -57,7 +58,11 @@ function AddNote() {
           />
         </Form.Group>
 
-        <SubmitBtn title="Add note" disabled={statusDisabledSubmit()} />
+        <SubmitBtn
+          loading={loading}
+          title="Add note"
+          disabled={statusDisabledSubmit()}
+        />
       </Form>
     </>
   );

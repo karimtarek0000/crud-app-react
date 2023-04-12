@@ -6,6 +6,7 @@ import SubmitBtn from "../buttons/SubmitBtn";
 
 function ConfirmModal() {
   const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.notesSlice);
   const {
     status,
     title,
@@ -36,6 +37,7 @@ function ConfirmModal() {
           </Button>
 
           <SubmitBtn
+            loading={loading}
             title={titleConfirm}
             onClick={confirmHandler}
             classes="bg-danger"

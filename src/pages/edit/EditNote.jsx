@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import SubmitBtn from "../../components/buttons/SubmitBtn";
 import Loading from "../../components/loading/Loading";
@@ -10,6 +10,7 @@ import { cleanRecord, updateNote } from "../../store/notesSlice";
 function EditNote() {
   const navigate = useNavigate();
   const record = useNoteDetails();
+  const { loading } = useSelector((state) => state.notesSlice);
 
   const [titleNote, setTitleNote] = useState("");
   const [descNote, setDescNote] = useState("");
@@ -77,7 +78,11 @@ function EditNote() {
           />
         </Form.Group>
 
-        <SubmitBtn title="Edit note" disabled={statusDisabledSubmit()} />
+        <SubmitBtn
+          loading={loading}
+          title="Edit note"
+          disabled={statusDisabledSubmit()}
+        />
       </Form>
     </Loading>
   );
