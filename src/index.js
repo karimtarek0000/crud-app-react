@@ -6,10 +6,12 @@ import { RouterProvider } from "react-router-dom";
 import "./index.css";
 import router from "./router";
 import store from "./store";
+import { Toaster } from "react-hot-toast";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
+    <Toaster toastOptions={{ duration: 5000 }} />
     <RouterProvider router={router} />
   </Provider>
 );
