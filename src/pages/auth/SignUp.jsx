@@ -46,8 +46,7 @@ function SignUp() {
     },
   });
 
-  const CheckboxChangeHandler = () =>
-    setTerms((terms) => !terms);
+  const CheckboxChangeHandler = () => setTerms((terms) => !terms);
 
   return (
     <Form onSubmit={formik.handleSubmit}>

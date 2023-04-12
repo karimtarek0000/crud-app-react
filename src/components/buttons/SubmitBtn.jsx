@@ -1,9 +1,6 @@
 import { Button, Spinner } from "react-bootstrap";
-import { useSelector } from "react-redux";
 
-function SubmitBtn({ title, onClick = null, disabled = false, classes }) {
-  const { loading } = useSelector((state) => state.notesSlice);
-
+function SubmitBtn({ loading, title, onClick = null, disabled = false, classes }) {
   return (
     <Button
       variant="primary"

@@ -39,35 +39,40 @@ const initialState = {
   userData: JSON.parse(localStorage.getItem("userData")) || {},
   token: JSON.parse(localStorage.getItem("token")) || null,
   loggedIn: false,
-  loader: false,
+  loading: false,
   error: false,
 };
 
 const authSlice = createSlice({
+  name: "auth",
   initialState,
   reducers: {},
   extraReducers(builder) {
     // Sign up
     builder.addCase(signUp.pending, (state) => {
-      state.loader = true;
+      state.loading = true;
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
-      state.loader = false;
+      state.loading = false;
       console.log("Signup: ", payload);
     });
     builder.addCase(signUp.rejected, (state) => {
-      state.loader = false;
+      state.loading = false;
     });
     // Login
     builder.addCase(login.pending, (state) => {
-      state.loader = true;
+      state.loading = true;
     });
     builder.addCase(login.fulfilled, (state, { payload }) => {
-      state.loader = false;
-      console.log("Login: ", payload);
+      const { user, token } = payload;
+      state.loading = false;
+      state.userData = user;
+      state.token = token;
+      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("userData", JSON.stringify(user));
     });
     builder.addCase(login.rejected, (state) => {
-      state.loader = false;
+      state.loading = false;
     });
   },
 });
