@@ -1,7 +1,7 @@
 {
   "name": "crud-redux-router",
   "version": "0.1.0",
-  "homepage": "https://karimtarek0000.github.io/notes-app-react",
+  "homepage": "https://karimtarek0000.github.io/crud-app-react",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",
