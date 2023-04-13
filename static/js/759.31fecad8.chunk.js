@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkcrud_redux_router=self.webpackChunkcrud_redux_router||[]).push([[759],{2759:function(e,r,u){u.r(r);var t=u(2791),n=u(9434),c=u(7689),f=u(719);r.default=function(){var e=(0,n.I0)(),r=(0,c.UO)().id,u=(0,n.v9)((function(e){return e.notesSlice})).record;return(0,t.useEffect)((function(){e((0,f.getNote)(r))}),[e,r]),u}}}]);
-//# sourceMappingURL=759.31fecad8.chunk.js.map
